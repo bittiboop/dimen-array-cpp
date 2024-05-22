@@ -6,6 +6,7 @@ int main()
 {
 	const int cols = 100;
 	const int rows = 100;
+	int sum_global = 0;
 	int matrix[rows][cols];
 	int current_cols = 0, current_rows = 0;
 	srand(time(0));
@@ -24,59 +25,43 @@ int main()
 			matrix[i][j] = rand() % 10;
 		}
 	}
+	int sum_cols[cols];
+	int sum_rows[rows];
 	for (int i = 0; i < current_rows; i++)
 	{
+		sum_rows[i] = 0;
 		for (int j = 0; j < current_cols; j++) {
-			cout << matrix[i][j] << " ";
-		}
-		cout << endl;
-	}cout << endl << endl;
-	cout << "Sum of elements in the matrix: " << endl;
-	int sum = 0;
-	for (size_t i = 0; i < current_rows; i++)
-	{
-		for (size_t j = 0; j < current_cols; j++)
-		{
-			sum += matrix[i][j];
+			sum_rows[i] += matrix[i][j];
+			sum_global += matrix[i][j];
 		}
 	}
-	cout << sum << endl;
-
-	cout << "Average: ";
-	int avg = 0;
-	for (size_t i = 0; i < current_rows; i++)
+	for (int i = 0; i < current_cols; i++)
 	{
-		for (size_t j = 0; j < current_cols; j++)
-		{
-			avg = sum / 2;
+		sum_cols[i] = 0;
+		for (int j = 0; j < current_rows; j++) {
+			sum_cols[i] += matrix[j][i];
+			sum_global += matrix[j][i];
 		}
 	}
-	cout << avg << endl;
-	cout << "Max: ";
-	int max = matrix[0][0];
-	for (size_t i = 0; i < current_rows; i++)
+	
+	for (int i = 0; i < current_rows; i++)
 	{
-		for (size_t j = 0; j < current_cols; j++)
+		for (int j = 0; j < current_cols; j++)
 		{
-			if (matrix[i][j] > max)
-			{
-				max = matrix[i][j];
-			}
+			cout << matrix[i][j] << "   ";
 		}
+		cout << " |";
+		cout << sum_rows[i] << endl;
 	}
-	cout << max << endl;
-	cout << "Min: ";
-	int min = matrix[0][0];
-	for (size_t i = 0; i < current_rows; i++)
+	for (int i = 0; i < current_cols; i++)
 	{
-		for (size_t j = 0; j < current_cols; j++)
-		{
-			if (matrix[i][j] < min)
-			{
-				min = matrix[i][j];
-			}
-		}
+		cout << "-----";
 	}
-	cout << min << endl;
+	cout << endl;
+	for (int i = 0; i < current_cols; i++)
+	{
+		cout << sum_cols[i] << "  ";
+	}
+	cout << " |" << sum_global << endl;
 	return 0;
 }
