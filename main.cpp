@@ -41,6 +41,7 @@ int main()
 		}
 	}
 	cout << sum << endl;
+
 	cout << "Average: ";
 	int avg = 0;
 	for (size_t i = 0; i < current_rows; i++)
